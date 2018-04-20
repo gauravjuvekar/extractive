@@ -1,0 +1,6 @@
+[submodule "SIF"]
+	path = SIF
+	url = https://github.com/gauravjuvekar/SIF.git
+[submodule "sent2vec"]
+	path = sent2vec
+	url = https://github.com/gauravjuvekar/sent2vec.git
