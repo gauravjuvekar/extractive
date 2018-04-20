@@ -4,3 +4,4 @@ tags
 *.bak
 sent2vec/fasttext
 sent2vec/src/sent2vec.cpp
+data
