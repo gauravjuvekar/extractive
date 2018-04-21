@@ -10,8 +10,7 @@ import scipy.spatial.distance
 import pickle
 import functools
 import statistics
-from collections
-import defaultdict
+from collections import defaultdict
 
 import numpy as np
 np.set_printoptions(threshold=10)
