@@ -4,6 +4,8 @@ import sent2vec
 
 import nltk
 import nltk.cluster
+import nltk.tokenize
+import nltk.tokenize.moses
 import scipy
 import scipy.spatial
 import scipy.spatial.distance
