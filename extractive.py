@@ -89,33 +89,90 @@ def cluster_kmeans(sents, k, dist_func=nltk.cluster.euclidean_distance):
     return list(grouped.values())
 
 
+def get_summary(clusters, dist_metric):
+    representatives = []
+    for cluster in clusters:
+        s_embeds = [d['embed'] for d in cluster]
+        representative = cluster[medoid(s_embeds, dist_metric)]
+        representatives.append(representative)
+    return representatives
+
+
+def process_file(inputdir, input_filename, output_dir, line_proc,
+                 embed_func, cluster_dist_func, medoid_dist_metric):
+    filepath = os.path.join(inputdir, input_filename)
+    sentences = []
+    with open(filepath) as f:
+        for line in f:
+            line = line_proc(line)
+            words = nltk.word_tokenize(line)
+            sentences.append({'orig': line, 'words': words})
+
+    embeds = embed_func([x['words'] for x in sentences])
+    for i, e in enumerate(embeds):
+        sentences[i]['embed'] = e
+    for k in range(1, 10):
+        clusters = cluster_kmeans(sentences, k, dist_func=cluster_dist_func)
+        representatives = get_summary(clusters, dist_metric=medoid_dist_metric)
+        output_fname = os.path.join(output_dir, input_filename + '_K' + str(k))
+        with open(output_fname, 'w') as f:
+            for s in representatives:
+                print(s['orig'], file=f)
+
+def line_proc_strip_n(line):
+    return line.strip('\n').strip()
+
+def line_proc_strip_n_lower(line):
+    return line_proc_strip_n(line).lower()
+
 if __name__ == '__main__':
     import pprint
     if True:
         d = './data/datasets/tipster/body'
-        output_dir = './output'
         for fname in os.listdir(d):
             log.debug(fname)
-            f = os.path.join(d, fname)
-            sentences = []
-            with open(f) as f:
-                for line in f:
-                    line = line.strip('\n')
-                    line = line.strip()
-                    words = nltk.word_tokenize(line)
-                    sentences.append({'orig': line,
-                                      'words': words})
+            output_dir = './output_sif_euclidean_OrigCase'
+            os.mkdir(output_dir)
+            process_file(d, fname, output_dir, sif_embeds, line_proc_strip_n,
+                         nltk.cluster.euclidean_distance, 'euclidean')
 
-            embeds = sif_embeds([x['words'] for x in sentences])
-            for i, e in enumerate(embeds):
-                sentences[i]['embed'] = e
-            clusters = cluster_kmeans(sentences, 3)
-            representatives = []
-            for cluster in clusters:
-                s_embeds = [d['embed'] for d in cluster]
-                representative = cluster[medoid(s_embeds, 'euclidean')]
-                representatives.append(representative)
+            output_dir = './output_sif_euclidean_lowercase'
+            os.mkdir(output_dir)
+            process_file(d, fname, output_dir, sif_embeds,
+                line_proc_strip_n_lower,
+                nltk.cluster.euclidean_distance, 'euclidean')
 
-            with open(os.path.join(output_dir, fname), 'w') as f:
-                for s in representatives:
-                    print(s['orig'], file=f)
+            output_dir = './output_sif_cosine_OrigCase'
+            os.mkdir(output_dir)
+            process_file(d, fname, output_dir, sif_embeds,
+                line_proc_strip_n,
+                nltk.cluster.cosine_distance, 'cosine')
+
+            output_dir = './output_sif_cosine_lowercase'
+            os.mkdir(output_dir)
+            process_file(d, fname, output_dir, sif_embeds,
+                line_proc_strip_n_lower,
+                nltk.cluster.cosine_distance, 'cosine')
+
+            output_dir = './output_s2v_euclidean_OrigCase'
+            os.mkdir(output_dir)
+            process_file(d, fname, output_dir, s2v_embeds, line_proc_strip_n,
+                         nltk.cluster.euclidean_distance, 'euclidean')
+
+            output_dir = './output_s2v_euclidean_lowercase'
+            os.mkdir(output_dir)
+            process_file(d, fname, output_dir, s2v_embeds,
+                line_proc_strip_n_lower,
+                nltk.cluster.euclidean_distance, 'euclidean')
+
+            output_dir = './output_s2v_cosine_OrigCase'
+            os.mkdir(output_dir)
+            process_file(d, fname, output_dir, s2v_embeds,
+                line_proc_strip_n,
+                nltk.cluster.cosine_distance, 'cosine')
+
+            output_dir = './output_s2v_cosine_lowercase'
+            os.mkdir(output_dir)
+            process_file(d, fname, output_dir, s2v_embeds,
+                line_proc_strip_n_lower,
+                nltk.cluster.cosine_distance, 'cosine')
