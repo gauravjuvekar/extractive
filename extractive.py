@@ -12,8 +12,8 @@ import functools
 import statistics
 from collections import defaultdict
 
-import numpy
-numpy.set_printoptions(threshold=10)
+import numpy as np
+np.set_printoptions(threshold=10)
 
 import os
 
@@ -73,9 +73,10 @@ def underscore_tokenize(sentence):
 
 
 def medoid(vectors, dist_metric):
-    dist_matrix = scipy.spatial.distance.pdist(vectors, metric=dist_metric)
+    dist_matrix = scipy.spatial.distance.pdist(np.array(vectors),
+                                               metric=dist_metric)
     dist_matrix = scipy.spatial.distance.squareform(dist_matrix)
-    return numpy.argmin(dist_matrix.sum(axis=0))
+    return np.argmin(dist_matrix.sum(axis=0))
 
 
 def cluster_kmeans(sents, k, dist_func=nltk.cluster.euclidean_distance):
@@ -92,10 +93,11 @@ if __name__ == '__main__':
     import pprint
     if True:
         d = './data/datasets/tipster/body'
-        sentences = []
+        output_dir = './output'
         for fname in os.listdir(d):
             log.debug(fname)
             f = os.path.join(d, fname)
+            sentences = []
             with open(f) as f:
                 for line in f:
                     line = line.strip('\n')
@@ -104,15 +106,16 @@ if __name__ == '__main__':
                     sentences.append({'orig': line,
                                       'words': words})
 
-        embeds = sif_embeds([x['words'] for x in sentences])
-        for i, e in enumerate(embeds):
-            sentences[i]['embed'] = e
-        clusters = cluster_kmeans(sentences, 3)
-        representatives = []
-        for cluster in clusters:
-            representative = cluster[medoid(cluster, 'euclidean')]
-            representatives.append(representative)
+            embeds = sif_embeds([x['words'] for x in sentences])
+            for i, e in enumerate(embeds):
+                sentences[i]['embed'] = e
+            clusters = cluster_kmeans(sentences, 3)
+            representatives = []
+            for cluster in clusters:
+                s_embeds = [d['embed'] for d in cluster]
+                representative = cluster[medoid(s_embeds, 'euclidean')]
+                representatives.append(representative)
 
-        with open('./output.txt', 'w') as f:
-            for s in representatives:
-                print(s['orig'], file=f)
+            with open(os.path.join(output_dir, fname), 'w') as f:
+                for s in representatives:
+                    print(s['orig'], file=f)
