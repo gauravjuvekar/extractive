@@ -16,6 +16,7 @@ from collections import defaultdict
 
 import numpy as np
 np.set_printoptions(threshold=10)
+np.seterr(all='raise')
 
 import os
 
