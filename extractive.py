@@ -7,8 +7,7 @@ import nltk.cluster
 import scipy
 import scipy.spatial
 import scipy.spatial.distance
-import pickle
-import functools
+import pickle import functools
 import statistics
 from collections import defaultdict
 
@@ -98,8 +97,8 @@ def get_summary(clusters, dist_metric):
     return representatives
 
 
-def process_file(inputdir, input_filename, output_dir, line_proc,
-                 embed_func, cluster_dist_func, medoid_dist_metric):
+def process_file(inputdir, input_filename, output_dir, embed_func,
+                 line_proc, cluster_dist_func, medoid_dist_metric):
     filepath = os.path.join(inputdir, input_filename)
     sentences = []
     with open(filepath) as f:
