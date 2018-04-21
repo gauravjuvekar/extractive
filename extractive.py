@@ -83,7 +83,8 @@ def medoid(vectors, dist_metric):
 
 def cluster_kmeans(sents, k, dist_func=nltk.cluster.euclidean_distance):
     embeds = [d['embed'] for d in sents]
-    clusterer = nltk.cluster.kmeans.KMeansClusterer(k, dist_func)
+    clusterer = nltk.cluster.kmeans.KMeansClusterer(k, dist_func,
+                                                    avoid_empty_clusters=True)
     clusters = clusterer.cluster(embeds, True)
     grouped = defaultdict(list)
     for c_tag, sent in zip(clusters, sents):
