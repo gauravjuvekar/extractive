@@ -113,8 +113,15 @@ def process_file(inputdir, input_filename, output_dir, embed_func,
             sentences.append({'orig': line, 'words': words})
 
     embeds = embed_func([x['words'] for x in sentences])
+    s2 = []
     for i, e in enumerate(embeds):
-        sentences[i]['embed'] = e
+        if not np.any(e):
+            # Remove all zero vectors because they occur for some reason
+            continue
+        else:
+            sentences[i]['embed'] = e
+            s2.append(sentences[i])
+    sentences = s2
     for k in range(1, 10):
         clusters = cluster_kmeans(sentences, k, dist_func=cluster_dist_func)
         representatives = get_summary(clusters, dist_metric=medoid_dist_metric)
