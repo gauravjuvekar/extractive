@@ -7,9 +7,11 @@ import nltk.cluster
 import scipy
 import scipy.spatial
 import scipy.spatial.distance
-import pickle import functools
+import pickle
+import functools
 import statistics
-from collections import defaultdict
+from collections
+import defaultdict
 
 import numpy as np
 np.set_printoptions(threshold=10)
@@ -23,7 +25,7 @@ log.setLevel(logging.DEBUG)
 
 ENABLE = (
     'sif',
-    # 's2v',
+    's2v',
     )
 
 PREFETCH = True
