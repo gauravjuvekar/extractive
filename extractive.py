@@ -42,7 +42,7 @@ if 's2v' in ENABLE:
 def sif_embeds(sent_list):
     idx_mat, weight_mat, data = SIF.data_io.prepare_data(sent_list, sif_db)
     params = SIF.params.params()
-    params.rmpc = 1
+    params.rmpc = 0
     embedding = SIF.SIF_embedding.SIF_embedding(idx_mat,
                                                 weight_mat,
                                                 data,
@@ -150,14 +150,14 @@ if __name__ == '__main__':
             process_file(d, fname, output_dir, sif_embeds, line_proc_strip_n,
                          nltk.cluster.euclidean_distance, 'euclidean')
 
-            output_dir = './output_sif_euclidean_lowercase'
-            try:
-                os.mkdir(output_dir)
-            except FileExistsError:
-                pass
-            process_file(d, fname, output_dir, sif_embeds,
-                line_proc_strip_n_lower,
-                nltk.cluster.euclidean_distance, 'euclidean')
+            # output_dir = './output_sif_euclidean_lowercase'
+            # try:
+                # os.mkdir(output_dir)
+            # except FileExistsError:
+                # pass
+            # process_file(d, fname, output_dir, sif_embeds,
+                # line_proc_strip_n_lower,
+                # nltk.cluster.euclidean_distance, 'euclidean')
 
             output_dir = './output_sif_cosine_OrigCase'
             try:
@@ -168,14 +168,14 @@ if __name__ == '__main__':
                 line_proc_strip_n,
                 nltk.cluster.cosine_distance, 'cosine')
 
-            output_dir = './output_sif_cosine_lowercase'
-            try:
-                os.mkdir(output_dir)
-            except FileExistsError:
-                pass
-            process_file(d, fname, output_dir, sif_embeds,
-                line_proc_strip_n_lower,
-                nltk.cluster.cosine_distance, 'cosine')
+            # output_dir = './output_sif_cosine_lowercase'
+            # try:
+                # os.mkdir(output_dir)
+            # except FileExistsError:
+                # pass
+            # process_file(d, fname, output_dir, sif_embeds,
+                # line_proc_strip_n_lower,
+                # nltk.cluster.cosine_distance, 'cosine')
 
             output_dir = './output_s2v_euclidean_OrigCase'
             try:
@@ -185,14 +185,14 @@ if __name__ == '__main__':
             process_file(d, fname, output_dir, s2v_embeds, line_proc_strip_n,
                          nltk.cluster.euclidean_distance, 'euclidean')
 
-            output_dir = './output_s2v_euclidean_lowercase'
-            try:
-                os.mkdir(output_dir)
-            except FileExistsError:
-                pass
-            process_file(d, fname, output_dir, s2v_embeds,
-                line_proc_strip_n_lower,
-                nltk.cluster.euclidean_distance, 'euclidean')
+            # output_dir = './output_s2v_euclidean_lowercase'
+            # try:
+                # os.mkdir(output_dir)
+            # except FileExistsError:
+                # pass
+            # process_file(d, fname, output_dir, s2v_embeds,
+                # line_proc_strip_n_lower,
+                # nltk.cluster.euclidean_distance, 'euclidean')
 
             output_dir = './output_s2v_cosine_OrigCase'
             try:
@@ -203,11 +203,11 @@ if __name__ == '__main__':
                 line_proc_strip_n,
                 nltk.cluster.cosine_distance, 'cosine')
 
-            output_dir = './output_s2v_cosine_lowercase'
-            try:
-                os.mkdir(output_dir)
-            except FileExistsError:
-                pass
-            process_file(d, fname, output_dir, s2v_embeds,
-                line_proc_strip_n_lower,
-                nltk.cluster.cosine_distance, 'cosine')
+            # output_dir = './output_s2v_cosine_lowercase'
+            # try:
+                # os.mkdir(output_dir)
+            # except FileExistsError:
+                # pass
+            # process_file(d, fname, output_dir, s2v_embeds,
+                # line_proc_strip_n_lower,
+                # nltk.cluster.cosine_distance, 'cosine')
