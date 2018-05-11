@@ -118,10 +118,9 @@ def process_file(inputdir, input_filename, output_dir, embed_func,
     filepath = os.path.join(inputdir, input_filename)
     sentences = []
     with open(filepath, encoding='latin1') as f:
-        for line in f:
-            line = line_proc(line)
-            words = nltk.word_tokenize(line)
-            sentences.append({'orig': line, 'words': words})
+        for sent in nltk.sent_tokenize(f.read())
+            words = nltk.word_tokenize(sent)
+            sentences.append({'orig': sent, 'words': words})
 
     embeds = embed_func([x['words'] for x in sentences])
     s2 = []
