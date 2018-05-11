@@ -135,7 +135,8 @@ def process_file(inputdir, input_filename, output_dir, embed_func,
     for k in range(1, 10):
         clusters = cluster_kmeans(sentences, k, dist_func=cluster_dist_func)
         representatives = get_summary(clusters, dist_metric=medoid_dist_metric)
-        output_fname = os.path.join(output_dir, input_filename + '_K' + str(k))
+        output_fname = os.path.join(output_dir, input_filename + '_K' + str(k)
+            + '-' + medoid_dist_metric)
         with open(output_fname, 'w') as f:
             for s in representatives:
                 print(s['orig'], file=f)
