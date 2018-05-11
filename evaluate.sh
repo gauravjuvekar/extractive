@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 OUT_DIR="$1"
 rm -rf output_tmp
@@ -29,12 +30,12 @@ for folder in $OP_DIR/*
 do
     THIS_DIR=$(pwd)
     cd "$folder"
-    for file in ./*.txt.data*
+    for file in ./*.txt*
     do
         echo $file
         rename -E 's/_//g' "$file"
     done
-    for file in ./*.txt.data*
+    for file in ./*.txt*
     do
         rename -E 's/body\.txt(K[1-9]+)-(euclidean|cosine)/_'`basename $folder`'$2\.$1/' "$file"
     done
