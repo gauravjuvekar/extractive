@@ -41,23 +41,23 @@ def average_column (csv):
 import os
 directory = '.'
 
-n5 = open('./stats/SIFCOSINEORIGCASE-r1.txt',"w")
-n6 = open('./stats/SIFCOSINEORIGCASE-r2.txt',"w")
+n5 = open('./stats/COSINEORIGCASE-r1.txt',"w")
+n6 = open('./stats/COSINEORIGCASE-r2.txt',"w")
 
-n13 = open('./stats/SIFEUCLIDEANORIGCASE-r1.txt',"w")
-n14 = open('./stats/SIFEUCLIDEANORIGCASE-r2.txt',"w")
+n13 = open('./stats/EUCLIDEANORIGCASE-r1.txt',"w")
+n14 = open('./stats/EUCLIDEANORIGCASE-r2.txt',"w")
 
 print("COSINE ORIG CASE STATISTICS...")
 
 for filename in os.listdir(directory):
     if filename.endswith(".csv"):
-        if("ROUGE1" in filename and "SIF" in filename and "COSINE" in filename):
+        if("ROUGE1" in filename and "COSINE" in filename):
             #print(os.path.join(directory, filename))
             print(average_column(filename), file=n5)
 
 for filename in os.listdir(directory):
     if filename.endswith(".csv"):
-        if("ROUGE2" in filename and "SIF" in filename and "COSINE" in filename):
+        if("ROUGE2" in filename and "COSINE" in filename):
             #print(os.path.join(directory, filename))
             print(average_column(filename), file=n6)
 
@@ -65,34 +65,15 @@ print("EUCLIDEAN ORIG CASE STATISTICS...")
 
 for filename in os.listdir(directory):
     if filename.endswith(".csv"):
-        if("ROUGE1" in filename and "SIF" in filename and "EUCLIDEAN" in filename):
+        if("ROUGE1" in filename and "EUCLIDEAN" in filename):
             #print(os.path.join(directory, filename))
             print(average_column(filename), file=n13)
 
 for filename in os.listdir(directory):
     if filename.endswith(".csv"):
-        if("ROUGE2" in filename and "SIF" in filename and "EUCLIDEAN" in filename):
+        if("ROUGE2" in filename and "EUCLIDEAN" in filename):
             #print(os.path.join(directory, filename))
             print(average_column(filename), file=n14)
-
-l =  [
-    './stats/SIFCOSINELOWERCASE-r1.txt',
-    './stats/SIFCOSINELOWERCASE-r2.txt',
-    './stats/S2VCOSINELOWERCASE-r1.txt',
-    './stats/S2VCOSINELOWERCASE-r2.txt',
-    './stats/SIFCOSINEORIGCASE-r1.txt',
-    './stats/SIFCOSINEORIGCASE-r2.txt',
-    './stats/S2VCOSINEORIGCASE-r1.txt',
-    './stats/S2VCOSINEORIGCASE-r2.txt',
-    './stats/SIFEUCLIDEANLOWERCASE-r1.txt',
-    './stats/SIFEUCLIDEANLOWERCASE-r2.txt',
-    './stats/S2VEUCLIDEANLOWERCASE-r1.txt',
-    './stats/S2VEUCLIDEANLOWERCASE-r2.txt',
-    './stats/SIFEUCLIDEANORIGCASE-r1.txt',
-    './stats/SIFEUCLIDEANORIGCASE-r2.txt',
-    './stats/S2VEUCLIDEANORIGCASE-r1.txt',
-    './stats/S2VEUCLIDEANORIGCASE-r2.txt',
-]
 
 n5.close()
 n6.close()

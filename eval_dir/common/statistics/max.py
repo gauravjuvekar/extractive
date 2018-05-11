@@ -1,18 +1,14 @@
 
 l =  [
-    './stats/SIFCOSINELOWERCASE-r1.txt',
-    './stats/SIFCOSINELOWERCASE-r2.txt',
-    './stats/S2VCOSINELOWERCASE-r1.txt',
-    './stats/S2VCOSINELOWERCASE-r2.txt',
-    './stats/SIFEUCLIDEANLOWERCASE-r1.txt',
-    './stats/SIFEUCLIDEANLOWERCASE-r2.txt',
-    './stats/S2VEUCLIDEANLOWERCASE-r1.txt',
-    './stats/S2VEUCLIDEANLOWERCASE-r2.txt']
+    './stats/COSINELOWERCASE-r1.txt',
+    './stats/COSINELOWERCASE-r2.txt',
+    './stats/EUCLIDEANLOWERCASE-r1.txt',
+    './stats/EUCLIDEANLOWERCASE-r2.txt']
 o = [
-    './stats/SIFCOSINEORIGCASE-r1.txt',
-    './stats/SIFCOSINEORIGCASE-r2.txt',
-    './stats/SIFEUCLIDEANORIGCASE-r1.txt',
-    './stats/SIFEUCLIDEANORIGCASE-r2.txt'
+    './stats/COSINEORIGCASE-r1.txt',
+    './stats/COSINEORIGCASE-r2.txt',
+    './stats/EUCLIDEANORIGCASE-r1.txt',
+    './stats/EUCLIDEANORIGCASE-r2.txt'
     ]
 
 
