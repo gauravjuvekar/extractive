@@ -36,10 +36,21 @@ sif_db = SIF.data_io.setup_db('./data/sif.db')
 s2v_model = sent2vec.Sent2vecModel()
 
 if 's2v' in ENABLE:
-    s2v_model.load_model('./data/s2v_wiki_unigrams.bin')
+    s2v_model.load_model('./data/sent2vec_wiki_unigrams.bin')
 
 
 def sif_embeds(sent_list):
+    idx_mat, weight_mat, data = SIF.data_io.prepare_data(sent_list, sif_db)
+    params = SIF.params.params()
+    params.rmpc = 1
+    embedding = SIF.SIF_embedding.SIF_embedding(idx_mat,
+                                                weight_mat,
+                                                data,
+                                                params)
+    return list(embedding)
+
+
+def sif_embeds_nopcr(sent_list):
     idx_mat, weight_mat, data = SIF.data_io.prepare_data(sent_list, sif_db)
     params = SIF.params.params()
     params.rmpc = 0
@@ -209,5 +220,42 @@ if __name__ == '__main__':
             # except FileExistsError:
                 # pass
             # process_file(d, fname, output_dir, s2v_embeds,
+                # line_proc_strip_n_lower,
+                # nltk.cluster.cosine_distance, 'cosine')
+
+
+            log.debug(fname)
+            output_dir = './output_sif_nopcr_euclidean_OrigCase'
+            try:
+                os.mkdir(output_dir)
+            except FileExistsError:
+                pass
+            process_file(d, fname, output_dir, sif_embeds_nopcr, line_proc_strip_n,
+                         nltk.cluster.euclidean_distance, 'euclidean')
+
+            # output_dir = './output_sif_nopcr_euclidean_lowercase'
+            # try:
+                # os.mkdir(output_dir)
+            # except FileExistsError:
+                # pass
+            # process_file(d, fname, output_dir, sif_embeds_nopcr,
+                # line_proc_strip_n_lower,
+                # nltk.cluster.euclidean_distance, 'euclidean')
+
+            output_dir = './output_sif_nopcr_cosine_OrigCase'
+            try:
+                os.mkdir(output_dir)
+            except FileExistsError:
+                pass
+            process_file(d, fname, output_dir, sif_embeds,
+                line_proc_strip_n,
+                nltk.cluster.cosine_distance, 'cosine')
+
+            # output_dir = './output_sif_nopcr_cosine_lowercase'
+            # try:
+                # os.mkdir(output_dir)
+            # except FileExistsError:
+                # pass
+            # process_file(d, fname, output_dir, sif_embeds,
                 # line_proc_strip_n_lower,
                 # nltk.cluster.cosine_distance, 'cosine')
