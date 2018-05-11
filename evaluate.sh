@@ -1,7 +1,7 @@
 #!/bin/bash
 
 OUT_DIR="$1"
-rm -f output_tmp
+rm -rf output_tmp
 cp -r "$OUT_DIR" output_tmp
 
 OP_DIR="output_tmp/opinosis"
