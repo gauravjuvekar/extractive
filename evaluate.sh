@@ -6,9 +6,9 @@ cp -r "$OUT_DIR" output_tmp
 
 OP_DIR="output_tmp/opinosis"
 
-for folder in *
+for folder in "$OP_DIR/*"
 do
-    for file in "$OP_DIR/$folder/*"
+    for file in "$folder/*"
     do
         echo $file
         rename -E 's/_//g' "$file"
@@ -18,9 +18,9 @@ done
 
 OP_DIR="output_tmp/cmplg"
 
-for folder in *
+for folder in "$OP_DIR/*"
 do
-    for file in "$OP_DIR/$folder/*"
+    for file in "$folder/*"
     do
         echo $file
         rename -E 's/_//g' "$file"
