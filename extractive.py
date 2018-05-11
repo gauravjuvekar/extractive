@@ -150,10 +150,15 @@ def line_proc_strip_n_lower(line):
 if __name__ == '__main__':
     import pprint
     if True:
-        d = './data/datasets/tipster/body'
+        os.makedirs('./output', exist_ok=True)
+        os.makedirs('./output/opinosis', exist_ok=True)
+        os.makedirs('./output/opinosis/sif', exist_ok=True)
+        os.makedirs('./output/opinosis/s2v', exist_ok=True)
+        os.makedirs('./output/opinosis/sifnopcr', exist_ok=True)
+        d = './data/opinosis/topics'
         for fname in os.listdir(d):
             log.debug(fname)
-            output_dir = './output_sif_euclidean_OrigCase'
+            output_dir = './output/opinosis/sif/'
             try:
                 os.mkdir(output_dir)
             except FileExistsError:
@@ -161,16 +166,7 @@ if __name__ == '__main__':
             process_file(d, fname, output_dir, sif_embeds, line_proc_strip_n,
                          nltk.cluster.euclidean_distance, 'euclidean')
 
-            # output_dir = './output_sif_euclidean_lowercase'
-            # try:
-                # os.mkdir(output_dir)
-            # except FileExistsError:
-                # pass
-            # process_file(d, fname, output_dir, sif_embeds,
-                # line_proc_strip_n_lower,
-                # nltk.cluster.euclidean_distance, 'euclidean')
-
-            output_dir = './output_sif_cosine_OrigCase'
+            output_dir = './output/opinosis/sif/'
             try:
                 os.mkdir(output_dir)
             except FileExistsError:
@@ -179,16 +175,7 @@ if __name__ == '__main__':
                 line_proc_strip_n,
                 nltk.cluster.cosine_distance, 'cosine')
 
-            # output_dir = './output_sif_cosine_lowercase'
-            # try:
-                # os.mkdir(output_dir)
-            # except FileExistsError:
-                # pass
-            # process_file(d, fname, output_dir, sif_embeds,
-                # line_proc_strip_n_lower,
-                # nltk.cluster.cosine_distance, 'cosine')
-
-            output_dir = './output_s2v_euclidean_OrigCase'
+            output_dir = './output/opinosis/s2v/'
             try:
                 os.mkdir(output_dir)
             except FileExistsError:
@@ -196,16 +183,7 @@ if __name__ == '__main__':
             process_file(d, fname, output_dir, s2v_embeds, line_proc_strip_n,
                          nltk.cluster.euclidean_distance, 'euclidean')
 
-            # output_dir = './output_s2v_euclidean_lowercase'
-            # try:
-                # os.mkdir(output_dir)
-            # except FileExistsError:
-                # pass
-            # process_file(d, fname, output_dir, s2v_embeds,
-                # line_proc_strip_n_lower,
-                # nltk.cluster.euclidean_distance, 'euclidean')
-
-            output_dir = './output_s2v_cosine_OrigCase'
+            output_dir = './output/opinosis/s2v/'
             try:
                 os.mkdir(output_dir)
             except FileExistsError:
@@ -214,18 +192,7 @@ if __name__ == '__main__':
                 line_proc_strip_n,
                 nltk.cluster.cosine_distance, 'cosine')
 
-            # output_dir = './output_s2v_cosine_lowercase'
-            # try:
-                # os.mkdir(output_dir)
-            # except FileExistsError:
-                # pass
-            # process_file(d, fname, output_dir, s2v_embeds,
-                # line_proc_strip_n_lower,
-                # nltk.cluster.cosine_distance, 'cosine')
-
-
-            log.debug(fname)
-            output_dir = './output_sif_nopcr_euclidean_OrigCase'
+            output_dir = './output/opinosis/sifnopcr/'
             try:
                 os.mkdir(output_dir)
             except FileExistsError:
@@ -233,16 +200,7 @@ if __name__ == '__main__':
             process_file(d, fname, output_dir, sif_embeds_nopcr, line_proc_strip_n,
                          nltk.cluster.euclidean_distance, 'euclidean')
 
-            # output_dir = './output_sif_nopcr_euclidean_lowercase'
-            # try:
-                # os.mkdir(output_dir)
-            # except FileExistsError:
-                # pass
-            # process_file(d, fname, output_dir, sif_embeds_nopcr,
-                # line_proc_strip_n_lower,
-                # nltk.cluster.euclidean_distance, 'euclidean')
-
-            output_dir = './output_sif_nopcr_cosine_OrigCase'
+            output_dir = './output/opinosis/sifnopcr/'
             try:
                 os.mkdir(output_dir)
             except FileExistsError:
@@ -251,11 +209,64 @@ if __name__ == '__main__':
                 line_proc_strip_n,
                 nltk.cluster.cosine_distance, 'cosine')
 
-            # output_dir = './output_sif_nopcr_cosine_lowercase'
-            # try:
-                # os.mkdir(output_dir)
-            # except FileExistsError:
-                # pass
-            # process_file(d, fname, output_dir, sif_embeds,
-                # line_proc_strip_n_lower,
-                # nltk.cluster.cosine_distance, 'cosine')
+
+
+    if True:
+        os.makedirs('./output', exist_ok=True)
+        os.makedirs('./output/cmplg', exist_ok=True)
+        os.makedirs('./output/cmplg/sif', exist_ok=True)
+        os.makedirs('./output/cmplg/s2v', exist_ok=True)
+        os.makedirs('./output/cmplg/sifnopcr', exist_ok=True)
+        d = './data/cmplg-xml/bodies/'
+        for fname in os.listdir(d):
+            log.debug(fname)
+            output_dir = './output/cmplg/sif/'
+            try:
+                os.mkdir(output_dir)
+            except FileExistsError:
+                pass
+            process_file(d, fname, output_dir, sif_embeds, line_proc_strip_n,
+                         nltk.cluster.euclidean_distance, 'euclidean')
+
+            output_dir = './output/cmplg/sif/'
+            try:
+                os.mkdir(output_dir)
+            except FileExistsError:
+                pass
+            process_file(d, fname, output_dir, sif_embeds,
+                line_proc_strip_n,
+                nltk.cluster.cosine_distance, 'cosine')
+
+            output_dir = './output/cmplg/s2v/'
+            try:
+                os.mkdir(output_dir)
+            except FileExistsError:
+                pass
+            process_file(d, fname, output_dir, s2v_embeds, line_proc_strip_n,
+                         nltk.cluster.euclidean_distance, 'euclidean')
+
+            output_dir = './output/cmplg/s2v/'
+            try:
+                os.mkdir(output_dir)
+            except FileExistsError:
+                pass
+            process_file(d, fname, output_dir, s2v_embeds,
+                line_proc_strip_n,
+                nltk.cluster.cosine_distance, 'cosine')
+
+            output_dir = './output/cmplg/sifnopcr/'
+            try:
+                os.mkdir(output_dir)
+            except FileExistsError:
+                pass
+            process_file(d, fname, output_dir, sif_embeds_nopcr, line_proc_strip_n,
+                         nltk.cluster.euclidean_distance, 'euclidean')
+
+            output_dir = './output/cmplg/sifnopcr/'
+            try:
+                os.mkdir(output_dir)
+            except FileExistsError:
+                pass
+            process_file(d, fname, output_dir, sif_embeds,
+                line_proc_strip_n,
+                nltk.cluster.cosine_distance, 'cosine')
