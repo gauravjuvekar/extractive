@@ -117,7 +117,7 @@ def process_file(inputdir, input_filename, output_dir, embed_func,
                  line_proc, cluster_dist_func, medoid_dist_metric):
     filepath = os.path.join(inputdir, input_filename)
     sentences = []
-    with open(filepath) as f:
+    with open(filepath, encoding='latin1') as f:
         for line in f:
             line = line_proc(line)
             words = nltk.word_tokenize(line)
