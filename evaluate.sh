@@ -11,15 +11,8 @@ for folder in $OP_DIR/*
 do
     THIS_DIR=$(pwd)
     cd "$folder"
-    for file in ./*.txt.data*
-    do
-        echo $file
-        rename -E 's/_//g' "$file"
-    done
-    for file in ./*.txt.data*
-    do
-        rename -E 's/\.txt\.data(K[1-9]+)-(euclidean|cosine)/_'`basename $folder`'$2\.$1/' "$file"
-    done
+    rename -E 's/_//g' ./*.txt.data*
+    rename -E 's/\.txt\.data(K[1-9]+)-(euclidean|cosine)/_'`basename $folder`'$2\.$1/' ./*.txt.data*
     cd "$THIS_DIR"
 done
 
@@ -30,21 +23,14 @@ for folder in $OP_DIR/*
 do
     THIS_DIR=$(pwd)
     cd "$folder"
-    for file in ./*.txt*
-    do
-        echo $file
-        rename -E 's/_//g' "$file"
-    done
-    for file in ./*.txt*
-    do
-        rename -E 's/body\.txt(K[1-9]+)-(euclidean|cosine)/_'`basename $folder`'$2\.$1/' "$file"
-    done
+    rename -E 's/_//g' ./*.txt*
+    rename -E 's/body\.txt(K[1-9]+)-(euclidean|cosine)/_'`basename $folder`'$2\.$1/' ./*.txt*
     cd "$THIS_DIR"
 done
 
 
-OPINOSIS_DIR=$(realpath ../../data/opinosis/gold)
-CMPLG_DIR=$(realpath ../../data/cmplg-xml/gold)
+OPINOSIS_DIR=$(realpath ./data/opinosis/gold)
+CMPLG_DIR=$(realpath ./data/cmplg-xml/gold)
 
 OP_SIF=$(realpath ./output_tmp/opinosis/sif)
 OP_S2V=$(realpath ./output_tmp/opinosis/s2v)
